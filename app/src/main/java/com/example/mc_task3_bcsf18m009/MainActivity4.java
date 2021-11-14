@@ -4,19 +4,18 @@ import static android.graphics.Color.parseColor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Random;
-
-public class MainActivity3 extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity4 extends AppCompatActivity implements View.OnClickListener{
 
     Button nextBtn;
     TextView alphabet, correctAns;
+    TextView questionNo;
     QuestionPool questionPool;
     Question q;
     Button op1,op2,op3,op4;
@@ -24,19 +23,17 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
     int correctColor;
     int wrongColor;
     boolean flag = false;
-
+    int count = 1;
     private MediaPlayer correctSoundMediaPlayer;
     private MediaPlayer wrongSoundMediaPlayer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_main4);
         // media player
         correctSoundMediaPlayer = MediaPlayer.create(this,R.raw.correct);
         wrongSoundMediaPlayer = MediaPlayer.create(this,R.raw.wrong);
-
         // color initlization
         defaultColor = parseColor("#78432C");
         correctColor = parseColor("#0f8425");
@@ -44,6 +41,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         nextBtn = findViewById(R.id.nextBtn);
         alphabet = findViewById(R.id.arabicLetter);
         correctAns = findViewById(R.id.correctAns);
+        questionNo = findViewById(R.id.questionNo);
         op1 = findViewById(R.id.op1);
         op2 = findViewById(R.id.op2);
         op3 = findViewById(R.id.op3);
@@ -63,22 +61,6 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         op4.setText(q.op4);
     }
 
-    public String getRandomOption()
-    {
-        String [] catLists = {"Halqiyah","Lahatiyah","Shajariyah-Haafiyah","Tarfiyah","Nit-eeyah","Lisaveyah","Ghunna"};
-        String [] alphabet = {"۱","ب","ت","ث","ج","ح","خ","د","ذ","ر","ز","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ک","ل","م","ن","ہ","و","ی"};
-        String [] s1 = {"ا", "ہ", "ع","ح","غ","خ"};
-        String [] s2 = {"ق","ک"};
-        String [] s3 = {"ج","ش","ی","ض"};
-        String [] s4 = {"ل","ن","ر"};
-        String [] s5 = {"ط","د","ت"};
-        String [] s6 = {"ظ","ذ","ث"};
-        String [] s7 = {"م","ن"};
-        Random rand = new Random();
-        int index = rand.nextInt(28);
-        return alphabet[index];
-    }
-
     @Override
     public void onClick(View v)
     {
@@ -92,6 +74,17 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
                 op3.setText(q.op3);
                 op4.setText(q.op4);
                 flag = false;
+                count++;
+                if(count<=10)
+                {
+                    String s = "Question: " + count + "/10";
+                    questionNo.setText(s);
+                }
+                else
+                {
+                    Intent intent = new Intent(MainActivity4.this, MainActivity5.class);
+                    startActivity(intent);
+                }
                 resetColor();
                 correctAns.setText("");
                 break;
