@@ -14,8 +14,8 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        practiceBtn = findViewById(R.id.practiceBtn);
-        quizBtn = findViewById(R.id.quizBtn);
+        practiceBtn = findViewById(R.id.shareBtn);
+        quizBtn = findViewById(R.id.gotoHomeBtn);
         practiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

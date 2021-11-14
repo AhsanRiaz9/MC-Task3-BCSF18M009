@@ -67,26 +67,26 @@ public class MainActivity4 extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.nextBtn:
-                q = questionPool.getRandomQuestion();
-                alphabet.setText(q.letter);
-                op1.setText(q.op1);
-                op2.setText(q.op2);
-                op3.setText(q.op3);
-                op4.setText(q.op4);
-                flag = false;
                 count++;
                 if(count<=10)
                 {
                     String s = "Question: " + count + "/10";
                     questionNo.setText(s);
+                    q = questionPool.getRandomQuestion();
+                    alphabet.setText(q.letter);
+                    op1.setText(q.op1);
+                    op2.setText(q.op2);
+                    op3.setText(q.op3);
+                    op4.setText(q.op4);
+                    flag = false;
+                    resetColor();
+                    correctAns.setText("");
                 }
                 else
                 {
                     Intent intent = new Intent(MainActivity4.this, MainActivity5.class);
                     startActivity(intent);
                 }
-                resetColor();
-                correctAns.setText("");
                 break;
             case R.id.op1:
                 if(flag==false)
